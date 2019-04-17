@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+        navView.setCheckedItem(R.id.navSearchByTitle)
 
         addFragments()
 
@@ -96,10 +97,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.navSearchByTitle -> {
                 searchType = SearchType.TITLE
                 editTextSearch.setText("")
+                editTextSearch.setHint(R.string.hint_search_title)
             }
             R.id.navSearchById -> {
                 searchType = SearchType.ID
                 editTextSearch.setText("")
+                editTextSearch.setHint(R.string.hint_search_by_id)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -109,6 +112,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     enum class SearchType {
         TITLE, ID
     }
-
-    fun Fragment.className() = this.javaClass.simpleName
 }
