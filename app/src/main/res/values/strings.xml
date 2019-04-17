@@ -12,4 +12,11 @@
     <string name="text_search_by_title">Pesquisar por Título</string>
     <string name="text_search_by_id">Pesquisar por ID</string>
     <string name="cd_poster">poster</string>
+    <string name="text_awards">Awards</string>
+    <string name="title_year_movie">%1$s - %2$s</string>
+    <string name="text_directed_by">Directed by: %1$s</string>
+    <string name="text_actors">Actors: %1$s</string>
+    <string name="text_language_country">%1$s - %2$s</string>
+    <string name="text_none">None</string>
+    <string name="text_production">Production: %1$s</string>
 </resources>

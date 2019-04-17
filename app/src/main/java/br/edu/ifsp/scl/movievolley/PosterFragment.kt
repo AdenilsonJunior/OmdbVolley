@@ -7,32 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_poster.imageViewPoster
+import java.text.ParseException
 
-class PosterFragment : Fragment() {
+class PosterFragment : Fragment(), BindableFragment {
 
     companion object {
-       private const val KEY_POSTER = "key_poster"
-
-        fun newInstance(urlPoster: String): Fragment {
-            val bundle = Bundle()
-            bundle.putString(KEY_POSTER, urlPoster)
-
-            return PosterFragment().apply {
-                this.arguments = bundle
-            }
+        fun newInstance(): Fragment {
+            return PosterFragment()
         }
+        const val TAG = "PosterFragment"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_poster, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun <TYPE> bind(model: TYPE){
+        when (model) {
+            is String -> {
+                view?.run {
+                    Glide.with(this).load(model).into(imageViewPoster)
+                }
+            }
+            else -> throw RuntimeException("This method expected a String")
+        }
 
-        val url = arguments?.getString(KEY_POSTER)
-
-        Glide.with(view).load(url).into(imageViewPoster)
     }
-
 }
