@@ -19,4 +19,5 @@
     <string name="text_language_country">%1$s - %2$s</string>
     <string name="text_none">None</string>
     <string name="text_production">Production: %1$s</string>
+    <string name="text_movie_not_found">Movie not found!</string>
 </resources>

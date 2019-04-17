@@ -7,15 +7,19 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.buttonSearch
+import kotlinx.android.synthetic.main.content_main.containerDetails
+import kotlinx.android.synthetic.main.content_main.containerPoster
 import kotlinx.android.synthetic.main.content_main.editTextSearch
+import kotlinx.android.synthetic.main.content_main.textViewMovieNotFound
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var searchType = SearchType.TITLE
+    private var searchType = SearchType.TITLE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +40,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 attachCallback(object : SearchCallback {
                     override fun onSuccess(movieResponse: MovieResponse) {
                         bindBindableFragments(movieResponse)
+                        textViewMovieNotFound.visibility = View.GONE
                     }
 
                     override fun onError(e: Exception) {
                         Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
+                        textViewMovieNotFound.visibility = View.VISIBLE
                     }
 
+                    override fun onMovieNotFound() {
+                        editTextSearch.setText("")
+                        textViewMovieNotFound.visibility = View.VISIBLE
+                    }
                 })
             }.execute(editTextSearch.text.toString())
         }
@@ -57,6 +67,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (detailsFragment is BindableFragment) {
             detailsFragment.bind(movieResponse)
         }
+
+        containerPoster.visibility = View.VISIBLE
+        containerDetails.visibility = View.VISIBLE
     }
 
     private fun addFragments() {

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_poster.imageViewPoster
-import java.text.ParseException
 
 class PosterFragment : Fragment(), BindableFragment {
 
